@@ -1,0 +1,13 @@
+{
+  "puppeteer": {
+    "args": [
+      ",--no-sandbox",
+      ",--disable-setuid-sandbox"
+    ],
+    "headless": true
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) Gecko/20100101 Firefox/28.0)",
+  "url": "http://apps.land.gov.il/PirsumMichrazim/aspx/Search.aspx",
+  "timeout": 2000,
+  "cronTime": "* * * * *"
+}

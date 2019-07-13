@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "config": "^3.2.0",
     "cron": "^1.7.1",
     "puppeteer": "^1.18.1"
   },

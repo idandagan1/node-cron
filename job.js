@@ -1,19 +1,21 @@
 const puppeteer = require('puppeteer');
+const config = require('config');
+
+const {
+  url, userAgent, timeout, puppeteer: puppeteerConfig,
+} = config;
 
 module.exports = async function run() {
   try {
     const browser = await puppeteer.launch({
-      headless: true,
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-      ],
+      headless: puppeteerConfig.headless,
+      args: puppeteerConfig.args,
     });
     const page = await browser.newPage();
 
-    page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) Gecko/20100101 Firefox/28.0)');
+    page.setUserAgent(userAgent);
 
-    await page.goto('http://apps.land.gov.il/PirsumMichrazim/aspx/Search.aspx');
+    await page.goto(url);
     await page.waitForSelector('#yeud');
 
     await page.select('#yeud', '1');
@@ -22,10 +24,11 @@ module.exports = async function run() {
     await button.click();
 
     await page.waitForSelector('#tblResults', {
-      timeout: 2000,
+      timeout,
     });
 
-    console.log('There is results!'); // TODO: send email
+    console.log('There is results!');
+    // TODO: send email
   } catch (e) {
     throw new Error('No results');
   }
